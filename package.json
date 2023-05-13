@@ -1,0 +1,24 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "description": "loomat development utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loomat/utils.git"
+  },
+  "author": "sando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loomat/utils/issues"
+  },
+  "homepage": "https://github.com/loomat/utils#readme",
+  "dependencies": {
+    "keccak256": "^1.0.6",
+    "rfc4648": "^1.5.2",
+    "uuid": "^9.0.0"
+  }
+}
