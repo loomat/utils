@@ -1,8 +1,9 @@
 {
-  "name": "utils",
+  "name": "@loomat/utils",
   "version": "1.0.0",
   "description": "loomat development utilities",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "node test.js"
   },

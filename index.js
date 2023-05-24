@@ -1,6 +1,6 @@
-const keccak256 = require('keccak256')
-const{ v4:uuidv4 } = require('uuid')
-const { base32 } = require('rfc4648')
+import  keccak256 from 'keccak256'
+import { v4 as uuidv4 } from 'uuid'
+import  { base32 } from 'rfc4648'
 
 const DERIVE_PATH_KECCAK = "m/44'/60'/1'/0/0"
 
@@ -68,6 +68,46 @@ const utils = {
                                 case 'hex': return Buffer.from(x).toString('hex');
                                 case 'b32': return HexToB32(Buffer.from(x).toString('hex'));
                                 case 'b64': return Buffer.from(x).toString('base64');
+                                case 'text': return x;
+                                default: throw 'unkown destination encoding base'
+                            }
+                        }
+                    };
+
+                    case 'hex': return {
+                        to: (dest) => {
+                            switch(dest){
+                                case 'text': return Buffer.from(x, 'hex').toString();
+                                case 'buf': return Buffer.from(x, 'hex');
+                                case 'b32': return HexToB32(x);
+                                case 'b64': return Buffer.from('68656c6c6f20776f726c6421', 'hex').toString('base64');
+                                case 'text': return x;
+                                default: throw 'unkown destination encoding base'
+                            }
+                        }
+                    };
+
+                    case 'b64': return {
+                        to: (dest) => {
+                            switch(dest){
+                                case 'text': return Buffer.from(x, 'base64').toString();
+                                case 'hex': return Buffer.from(x, 'base64').toString('hex');
+                                case 'buf': return Buffer.from(x, 'base64');
+                                case 'b32': return HexToB32(Buffer.from(x, 'base64').toString('hex'));
+                                case 'b64': return x;
+                                default: throw 'unkown destination encoding base'
+                            }
+                        }
+                    };
+
+                    case 'b32': return {
+                        to: (dest) => {
+                            switch(dest){
+                                case 'text': return Buffer.from(B32ToHex(x), 'hex').toString();
+                                case 'hex': return B32ToHex(x);
+                                case 'buf': return Buffer.from(B32ToHex(x), 'hex');
+                                case 'b64': return Buffer.from(B32ToHex(x), 'hex').toString('base64');
+                                case 'b32': return x;
                                 default: throw 'unkown destination encoding base'
                             }
                         }
@@ -78,32 +118,9 @@ const utils = {
                             switch(dest){
                                 case 'text': return x.toString();
                                 case 'hex': return x.toString('hex');
-                                case 'b32': return HexToB32(x);
+                                case 'b32': return HexToB32(x.toString('hex'));
                                 case 'b64': return x.toString('base64');
-                                default: throw 'unkown destination encoding base'
-                            }
-                        }
-                    };
-
-                    case 'b32': return {
-                        to: (dest) => {
-                            switch(dest){
-                                case 'text': return 0;
-                                case 'hex': return 0;
-                                case 'buf': return 0;
-                                case 'b64': return 0;
-                                default: throw 'unkown destination encoding base'
-                            }
-                        }
-                    };
-
-                    case 'b64': return {
-                        to: (dest) => {
-                            switch(dest){
-                                case 'text': return 0;
-                                case 'hex': return 0;
-                                case 'buf': return 0;
-                                case 'b32': return 0;
+                                case 'buf': return x;
                                 default: throw 'unkown destination encoding base'
                             }
                         }
@@ -118,4 +135,4 @@ const utils = {
     addressify: addressify,
 }
 
-module.exports =  utils
+export default utils
