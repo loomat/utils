@@ -1,6 +1,6 @@
 {
   "name": "@loomat/utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "loomat development utilities",
   "main": "index.js",
   "type": "module",
